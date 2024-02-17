@@ -2,4 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.sky.mapper.EmployeeMapper">
+<!--    <sql id="BaseColumnList">-->
+<!--        id, name, username, password, phone, sex, id_number, create_time, update_time, create_user, update_user, status-->
+<!--    </sql>-->
+    <select id="pageQuery" resultType="com.sky.entity.Employee">
+        SELECT *
+        FROM employee
+        <where>
+            <if test="name != null and name != ''"> and name like concat('%', #{name}, '%')</if>
+        </where>
+        ORDER BY create_time DESC
+    </select>
 </mapper>
