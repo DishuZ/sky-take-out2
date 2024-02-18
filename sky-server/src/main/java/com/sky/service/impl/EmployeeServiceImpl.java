@@ -46,7 +46,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         //2、处理各种异常情况（用户名不存在、密码不对、账号被锁定）
         if (employee == null) {
-            //账号不存在
+            // 账号不存在
             throw new AccountNotFoundException(MessageConstant.ACCOUNT_NOT_FOUND);
         }
 
@@ -84,7 +84,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         employee.setUpdateUser(BaseContext.getCurrentId());
         employee.setCreateUser(BaseContext.getCurrentId());
 
-        // TODO 判断用户名是否重复
+        // 判断用户名是否重复
         // 有两种处理方法：
         // 1) 通过用户名主动查询数据库是否已存在数据，并抛出异常
         Employee dbEmployee = employeeMapper.getByUsername(employee.getUsername());
@@ -103,6 +103,36 @@ public class EmployeeServiceImpl implements EmployeeService {
         PageHelper.startPage(employeePageQueryDTO.getPage(), employeePageQueryDTO.getPageSize());
         Page<Employee> page = employeeMapper.pageQuery(employeePageQueryDTO);
         return new PageResult(page.getTotal(), page.getResult());
+    }
+
+    @Override
+    public void startOrStop(Integer status, Long id) {
+        // @Builder 注解后的 new 形式
+        Employee employee = Employee.builder()
+                .status(status)
+                .id(id)
+                .build();
+        // 更新 employee 表
+        // update employee set statue = ? [and ...]  where id = ?
+        employeeMapper.updateById(employee);
+    }
+
+    @Override
+    public void update(EmployeeDTO employeeDTO) {
+        Employee employee = new Employee();
+        BeanUtils.copyProperties(employeeDTO, employee);
+        // 更新用户&更新时间
+        employee.setUpdateTime(LocalDateTime.now());
+        employee.setUpdateUser(BaseContext.getCurrentId());
+        // 更新 employee 表
+        employeeMapper.updateById(employee);
+    }
+
+    @Override
+    public Employee getById(Long id) {
+        Employee employee = employeeMapper.getById(id);
+        employee.setPassword("***");  // 隐藏密码
+        return employee;
     }
 
 

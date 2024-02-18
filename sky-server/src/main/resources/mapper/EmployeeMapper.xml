@@ -2,7 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.sky.mapper.EmployeeMapper">
-<!--    <sql id="BaseColumnList">-->
+    <update id="updateById" parameterType="com.sky.entity.Employee">
+        UPDATE employee
+        <set>
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="username != null">username = #{username},</if>
+            <if test="password != null">password = #{password},</if>
+            <if test="phone != null">phone = #{phone},</if>
+            <if test="sex != null">sex = #{sex},</if>
+            <if test="idNumber != null">id_number = #{idNumber},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="updateUser != null">update_user = #{updateUser},</if>
+            <if test="status != null">status = #{status},</if>
+        </set>
+        WHERE id = #{id}
+    </update>
+    <!--    <sql id="BaseColumnList">-->
 <!--        id, name, username, password, phone, sex, id_number, create_time, update_time, create_user, update_user, status-->
 <!--    </sql>-->
     <select id="pageQuery" resultType="com.sky.entity.Employee">
