@@ -79,10 +79,11 @@ public class EmployeeServiceImpl implements EmployeeService {
         // TODO 后续完善公共字段自动填充功能
         employee.setStatus(StatusConstant.ENABLE);
         employee.setPassword(DigestUtils.md5DigestAsHex(PasswordConstant.DEFAULT_PASSWORD.getBytes()));  // 默认密码
-        employee.setUpdateTime(LocalDateTime.now());
-        employee.setCreateTime(LocalDateTime.now());
-        employee.setUpdateUser(BaseContext.getCurrentId());
-        employee.setCreateUser(BaseContext.getCurrentId());
+        // (x, 由 AutoFill 和 AutoFillAspect 统一自动填充公共字段)
+        //employee.setUpdateTime(LocalDateTime.now());
+        //employee.setCreateTime(LocalDateTime.now());
+        //employee.setUpdateUser(BaseContext.getCurrentId());
+        //employee.setCreateUser(BaseContext.getCurrentId());
 
         // 判断用户名是否重复
         // 有两种处理方法：
@@ -121,9 +122,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     public void update(EmployeeDTO employeeDTO) {
         Employee employee = new Employee();
         BeanUtils.copyProperties(employeeDTO, employee);
-        // 更新用户&更新时间
-        employee.setUpdateTime(LocalDateTime.now());
-        employee.setUpdateUser(BaseContext.getCurrentId());
+        // 更新用户&更新时间 (x, 由 AutoFill 和 AutoFillAspect 统一自动填充公共字段)
+        //employee.setUpdateTime(LocalDateTime.now());
+        //employee.setUpdateUser(BaseContext.getCurrentId());
         // 更新 employee 表
         employeeMapper.updateById(employee);
     }

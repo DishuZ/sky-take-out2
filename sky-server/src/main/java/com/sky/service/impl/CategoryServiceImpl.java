@@ -43,11 +43,11 @@ public class CategoryServiceImpl implements CategoryService {
         BeanUtils.copyProperties(categoryDTO, category); // 属性拷贝
         // 分类状态默认为禁用状态0
         category.setStatus(0);
-        // 设置创建时间、修改时间、创建人、修改人
-        category.setCreateTime(LocalDateTime.now());
-        category.setUpdateTime(LocalDateTime.now());
-        category.setCreateUser(BaseContext.getCurrentId());
-        category.setUpdateUser(BaseContext.getCurrentId());
+        // 设置创建时间、修改时间、创建人、修改人 (x, 由 AutoFill 和 AutoFillAspect 统一自动填充公共字段)
+        //category.setCreateTime(LocalDateTime.now());
+        //category.setUpdateTime(LocalDateTime.now());
+        //category.setCreateUser(BaseContext.getCurrentId());
+        //category.setUpdateUser(BaseContext.getCurrentId());
         // 判断该分类名是否已存在
         Category dbCategory = categoryMapper.getByName(category.getName());
         if (dbCategory != null) {
@@ -92,9 +92,9 @@ public class CategoryServiceImpl implements CategoryService {
         Category category = new Category();
         BeanUtils.copyProperties(categoryDTO,category);
 
-        //设置修改时间、修改人
-        category.setUpdateTime(LocalDateTime.now());
-        category.setUpdateUser(BaseContext.getCurrentId());
+        //设置修改时间、修改人 (x, 由 AutoFill 和 AutoFillAspect 统一自动填充公共字段)
+        //category.setUpdateTime(LocalDateTime.now());
+        //category.setUpdateUser(BaseContext.getCurrentId());
 
         // 判断该分类名是否已存在
         Category dbCategory = categoryMapper.getByName(category.getName());
@@ -111,8 +111,9 @@ public class CategoryServiceImpl implements CategoryService {
         Category category = Category.builder()
                 .id(id)
                 .status(status)
-                .updateTime(LocalDateTime.now())
-                .updateUser(BaseContext.getCurrentId())
+                // (x, 由 AutoFill 和 AutoFillAspect 统一自动填充公共字段)
+                //.updateTime(LocalDateTime.now())
+                //.updateUser(BaseContext.getCurrentId())
                 .build();
 
         // 更新 category 表
