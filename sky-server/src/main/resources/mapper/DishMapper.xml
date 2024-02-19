@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sky.mapper.DishMapper">
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO dish (name, category_id, price, image, description, status, create_time, update_time, create_user, update_user)
+        VALUES (#{name}, #{categoryId}, #{price}, #{image}, #{description}, #{status}, #{createTime}, #{updateTime}, #{createUser}, #{updateUser})
+    </insert>
+
+    <update id="updateById">
+        UPDATE dish
+        <set>
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="categoryId != null">category_id = #{categoryId},</if>
+            <if test="price != null">price = #{price},</if>
+            <if test="image != null">image = #{image},</if>
+            <if test="description != null">description = #{description},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="updateUser != null">update_user = #{updateUser},</if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <select id="pageQuery" resultType="com.sky.vo.DishVO">
+        SELECT d.*, c.name as categoryName
+        FROM dish d
+        LEFT OUTER JOIN category c
+        ON d.category_id = c.id
+        <where>
+            <if test="name != null and name != ''">AND d.name LIKE concat('%',#{name},'%')</if>
+            <if test="categoryId != null">AND d.category_id = #{categoryId}</if>
+            <if test="status != null">AND d.status = #{status}</if>
+        </where>
+        ORDER BY d.create_time DESC
+    </select>
+</mapper>

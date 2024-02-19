@@ -6,3 +6,8 @@ sky:
     database: sky_take_out
     username: root
     password: 1234
+  alioss:
+    access-key-id: LTAI5tBHyBT53FuaXqSSo1PB
+    access-key-secret: 1nlMSFMiderGw8l87PRb7h9iHOp1WO
+    endpoint: oss-cn-beijing.aliyuncs.com
+    bucket-name: zenbu-java-learn
