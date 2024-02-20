@@ -11,3 +11,22 @@ sky:
     access-key-secret: 1nlMSFMiderGw8l87PRb7h9iHOp1WO
     endpoint: oss-cn-beijing.aliyuncs.com
     bucket-name: zenbu-java-learn
+  redis:
+    host: localhost
+    port: 6379
+    database: 0
+    password: ''
+  wechat:
+    appid: wx421e52d36eae404e
+    secret: 259eb2faa6c59625c72504589cd366b0
+    mchid: 1561414331
+    mchSerialNo: 4B3B3DC35414AD50B1B755BAF8DE9CC7CF407606
+    privateKeyFilePath: D:\pay\apiclient_key.pem
+    apiV3Key: CZBK51236435wxpay435434323FFDuv3
+    weChatPayCertFilePath: D:\pay\wechatpay_166D96F876F45C7D07CE98952A96EC980368ACFC.pem
+    notifyUrl: https://6619cf50.r6.cpolar.top/notify/paySuccess
+    refundNotifyUrl: https://6619cf50.r6.cpolar.top/notify/refundSuccess
+  shop:
+    address: 广东省揭阳市揭西县上砂镇华南学校
+  baidu:
+    ak: YodiLoLmYkUmayyBeUuM3AkCIcNsrA0l
